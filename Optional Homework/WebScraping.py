@@ -32,17 +32,25 @@ class Client(object):
         if title:
             title = title.text
         else:
-            title = "Sense Titol"
+            title = "Untitled"
 
         return title
 
+    def printResult(self, result):
+        result = result.replace("\t" ,"")
+        result = result.replace("\n", "")
+
+        return result
+
     def main(self):
-        web = self.get_web('https://www.packtpub.com/packt/offers/free-learning/')
-        resultat = self.search_text(web)
+        web = self.get_web('https://www.packtpub.com/packt/offers/'\
+                           'free-learning/')
+        result = self.search_text(web)
+        result = self.printResult(result)
 
         # Print Result
-        print resultat
-
+        print "The book of PacktPub Today is:"
+        print chr(27) + "[1;34m" + result
 
 if __name__ == "__main__":
     client = Client()
