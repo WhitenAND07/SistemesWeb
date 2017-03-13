@@ -61,7 +61,7 @@ if __name__ == "__main__" :
 
     if not api_key:
         try:
-            api_key =  "27ccd3209edffffc" #sys.argv[1]
+            api_key =  sys.argv[1]
             wc = WeatherClient(api_key)
             result = wc.almanac("Lleida")
             print result
