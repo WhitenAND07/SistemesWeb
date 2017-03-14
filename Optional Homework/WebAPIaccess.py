@@ -5,7 +5,7 @@
 '''
 Client Web per http://api.wunderground.com/api/******************/hourly/q/CA/Lleida.xml
 
-@Author: JordiBlancoLopez
+@Author: JordiBlancoLopez --> 20998
 '''
 
 import sys
