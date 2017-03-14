@@ -21,7 +21,6 @@ class WeatherClient(object):
     url_base = "http://api.wunderground.com/api/"
     url_service = {
         "hourly": "/hourly/q/CA/",
-        "almanac": "/almanac/almanac/q/CA/"
     }
     format = ".xml"
 
@@ -86,42 +85,18 @@ class WeatherClient(object):
         # Return the result
         return resultats
 
-    def almanac (self, location):
-        """Read the site Almanac"""
-        data = self.get_web(location, WeatherClient.url_service["almanac"])
-
-        soup = BeautifulSoup(data, 'lxml')
-
-        result = {}
-        result["maximes"] = {}
-        result["minimes"] = {}
-
-        maximes = soup.find("temp_high")
-        result["maximes"]["normal"] = maximes.find("normal").find("c").text
-        result["maximes"]["record"] = maximes.find("record").find("c").text
-
-        minimes = soup.find("temp_low")
-        result["minimes"]["normal"] = minimes.find("normal").find("c").text
-        result["minimes"]["record"] = minimes.find("record").find("c").text
-
-        # Return the result
-        return result
-
 if __name__ == "__main__" :
+
     location = "Lleida"
 
     if not api_key:
         try:
-            api_key = sys.argv[1]
+            api_key = "27ccd3209edffffc" #sys.argv[1]
             wc = WeatherClient(api_key)
             resultHourly = wc.hourly(location)
-            resultAlmanac = wc.almanac(location)
 
             print "Hourly about " + location + ":\n"
             print resultHourly
-
-            print "Almanac about " + location + ":\n"
-            print resultAlmanac
 
         except IndexError:
             print "API Key must be in CLI option"
